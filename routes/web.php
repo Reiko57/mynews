@@ -18,15 +18,18 @@ Route::get('/', function () {
 });
 Route::group(['prefix' => 'admin'], function() {
     Route::get('news/create', 'Admin\NewsController@add');
+    // Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
 });
 // http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定
-Route :: get('xxx', 'xxx\AAAController@bbb');
+Route::get('xxx', 'xxx\AAAController@bbb');
 
 // getメソッドでadmin/profile/create にアクセスしたら ProfileController の add Action に、
 // admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください
 
-Route :: group(['prefix' => 'admin'], function(){
-    Route :: get('profile/create', 'Admin\Profilecontroller@add');
-    Route :: get('profile/edit', 'Admin\Profilecontroller@edit');
-
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('profile/create', 'Admin\Profilecontroller@add')->middleware('auth');
+    Route::get('profile/edit', 'Admin\Profilecontroller@edit')->middleware('auth');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
