@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('news/create', 'Admin\NewsController@add');
+    Route::post('news/create', 'Admin\NewsController@create'); 
     // Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
 });
 // http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定
@@ -28,6 +29,7 @@ Route::get('xxx', 'xxx\AAAController@bbb');
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('profile/create', 'Admin\Profilecontroller@add')->middleware('auth');
+    Route::post('news/create', 'Admin\Profilecontroller@create');
     Route::get('profile/edit', 'Admin\Profilecontroller@edit')->middleware('auth');
 });
 Auth::routes();
