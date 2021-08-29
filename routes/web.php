@@ -28,10 +28,10 @@ Route::get('xxx', 'xxx\AAAController@bbb');
 // admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('profile/create', 'Admin\Profilecontroller@add')->middleware('auth');
-    Route::post('profile/create', 'Admin\Profilecontroller@create');
-    Route::get('profile/edit', 'Admin\Profilecontroller@edit')->middleware('auth');
-    Route::post('profile/edit', 'Admin\Profilecontroller@update');
+    Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
+    Route::post('profile/create', 'Admin\ProfileController@create');
+    Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
+    Route::post('profile/edit', 'Admin\ProfileController@update');
 });
 Auth::routes();
 
